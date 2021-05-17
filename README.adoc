@@ -1,4 +1,4 @@
-= PTUT S2 2020/2021
+= PTUT S2 2021
 :icons: font
 
 // Specific to GitHub
@@ -34,10 +34,17 @@ Une application fonctionnelle v0 vous est fournie sous la forme :
 - d'un exécutable `RHESN_V0.jar` à la racine de votre projet
 - des sources dans le répertoire `src`.
 
-Les premiers modèles sont également disponibles dans le répertoire `doc/media/v0` :
+:version: v0
+Les premiers modèles sont également disponibles dans le répertoire `doc/media/{version}` :
 
-.Diagramme de Classe de la v0
-image::doc/media/v0/dc.png[DC]
+.Diagramme des Cas d'utilisation de la {version}
+image::doc/media/{version}/uc.png[UC,width=60%]
+
+.Diagramme des Classes Métiers de la {version}
+image::doc/media/{version}/dc.png[DC,width=60%]
+
+.SNI de la {version}
+image::doc/media/{version}/sni.png[SNI,width=60%]
 
 == Équipe de développement (à mettre à jour)
 
