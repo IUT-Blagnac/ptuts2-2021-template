@@ -35,7 +35,7 @@ On pourra par exemple ajouter ici le diagramme de classe en le commentant.
 
 Voici le diagramme qui présente l'architecture initiale de l'application :
 
-image::ptut20192020Packages.png[Architecture,width=60%]
+image::ptut20202021Packages.png[Architecture,width=60%]
 
 NOTE: Vous pouvez pour cela reprendre la façon de faire du projet BCOO.
 
