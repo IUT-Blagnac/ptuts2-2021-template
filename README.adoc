@@ -53,10 +53,35 @@ image::doc/media/{version}/sni.png[SNI,width=80%]
 
 [cols="1,2,5",options=header]
 |===
-| Date  | Nom                |  Lien                        
-| 25/05 | Gantt du projet V1 |  link:doc/media/v0/dc.png[PDF] 
-|       |     |                  
-|       |     |                   
+| Date    | Nom         |  Lien                        
+| _24/05_ | _Exemple_   |  link:doc/media/v0/dc.png[PNG] 
+| 25/05   | Gantt V1    |   
+| 26/05   | CdC V1      |                  
+|         | Gantt V1-2  |                   
+| 27/05   | CdC V1 final |                  
+|         | Gantt V1-3  |
+| 28/05   | CdC V2 final |
+|         | Gantt V2    |                   
+|         | Doc. Util. V1 |                   
+|         | Doc. Tec. V1 |                   
+|         | Code V1     |                   
+|         | Recette V1  |                   
+|         | Gantt V2    |                   
+|         | `jar` projet |
+| 31/05   | Gantt V2-1    |   
+| 01/06   | Doc. Util. V2 |                   
+|         | Doc. Tec. V2 |                   
+|         | Code V2     |                   
+|         | Recette V2  |                   
+|         | Gantt V2-3    |                   
+|         | `jar` projet |
+| 02/06   | Gantt V3-1    |   
+| 03/06   | Doc. Util. V3 |                   
+|         | Doc. Tec. V3 |                   
+|         | Code V3     |                   
+|         | Recette V3  |                   
+|         | Gantt V3-2    |                   
+|         | `jar` projet |
 |===
 
 == Liens utiles
