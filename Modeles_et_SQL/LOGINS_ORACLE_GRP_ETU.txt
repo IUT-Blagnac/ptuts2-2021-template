@@ -1,6 +1,0 @@
-Login : pjtS2grp03 à pjtS2grp30
-
-pwd : Iut2019  (à changer avec commande password)
-
-
-
