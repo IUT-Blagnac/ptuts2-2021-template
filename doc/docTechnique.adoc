@@ -5,7 +5,7 @@
 :icons: font
 
 // --------- Variables ----------
-:company: BankUniv
+:company: RHESN
 :imagesdir: media
 
 image:https://www.iut-blagnac.fr/images/structure/iut-blagnac-logo.png[IUT,width=20%]
@@ -20,10 +20,9 @@ toc::[]
 
 == Présentation de l'Application
 
-La banque {company} souhaite développer une application JAVA-Oracle de gestion des comptes clients pour remplacer plusieurs outils obsolètes.
-Ce développement s’inscrit dans le cadre de la restructuration de ses services bancaires et l’application sera déployée dans les 100 agences que compte son réseau. 
-Vous travaillerez à partir d’une application existante `Daily Bank` qu’il faudra adapter aux nouveaux besoins de la banque.
+La société « DevExpert » est une Entreprise de Services Numériques (ESN ou encore SSII) qui fournit des prestations de développement d’applications informatiques pour ses clients. L’activité de l’entreprise repose sur des chefs de projet qui gèrent les projets des clients et d’un certain nombre d’employés salariés (analystes, concepteurs, développeurs, testeurs, designers, ergonomes, pentesters, webmaster, etc.) affectés sur les projets à réaliser. 
 
+On souhaite développer une application Java-Swing-Oracle de gestion des ressources humaines permettant aux chefs de projet qui gèrent l’ensemble des projets et clients de disposer d’un suivi des projets (prévisionnels, en cours et finalisés) et d’un état de la mobilisation des ressources humaines de l’entreprise (cartographie des affectations des salariés par projet). Vous travaillerez à partir d’une application existante «RHESN» qu’il faudra adapter aux besoins des chefs de projet.
 
 == Organisation de l’application
 
