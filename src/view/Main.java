@@ -6,6 +6,7 @@ import view.app.LoginDialog;
 
 /**
  * Main qui permet d'exécuter l'application
+ * commentaire
  */
 public class Main {
     public static void main(String[] args) {
