@@ -234,59 +234,158 @@ SELECT * FROM Employe;
 ----------------------------------------------------
 ------------------- Procedures Stockees ------------
 ----------------------------------------------------
-
 CREATE OR REPLACE PROCEDURE Authentifier (
 	pLoginSaisi Employe.login%TYPE,
 	pMotPasseSaisi Employe.motDePasse%TYPE,
-	reponse OUT VARCHAR)
+	vReponse OUT NUMBER,
+	vIdEmploye OUT Employe.idEmploye%TYPE,
+	vNom OUT Employe.nom%TYPE,
+	vPrenom OUT Employe.prenom%TYPE,
+	vEstActif OUT Employe.estActif%TYPE,
+	vIdRole OUT Employe.idRole%TYPE,
+	vIdCompetence OUT Employe.idCompetence%TYPE,
+	vIdNiveau OUT Employe.idNiveau%TYPE
+	)
 IS
 -- On vérifie que le login et motDePasse saisis sont bien connus dans la table Employe
--- S'ils existent bien :
---       on retourne le rôle de l'employé concerné ('Employe' ou 'Chef de Projet') 
---       OU 'Inactif' si le client est connu mais inactif (quelque soit son rôle)
--- Sinon on retourne 'Inconnu'
-
-	vEstActif 	Employe.estActif%TYPE;
-	vNomRole 	Role.nom%TYPE;
+--       On retourne la valeur 1 (var. Retour) si l'employé existe en tant qu'actif (et on retourne aussi toutes les infos de l'employé concerné)
+--       OU la valeur 2 (var. Retour) si l'employé est connu mais inactif (et on retourne aussi toutes les infos de l'employé concerné)
+-- 		 OU la valeur 0 (var. Retour) si l'employé est inconnu ou si plusieurs employés possédent ce même login (et on retourne aussi toutes les infos du 1er employé trouvé avec ce login dans la BD)
 
 BEGIN
-	SELECT E.estActif, R.nom INTO vEstActif, vNomRole FROM Employe E, Role R
-	WHERE E.idRole = R.idRole
-	AND E.login = pLoginSaisi
-	AND E.motDePasse = pMotPasseSaisi;
+	SELECT idEmploye, nom, prenom, estActif, idRole, idCompetence, idNiveau
+	INTO vIdEmploye, vNom, vPrenom, vEstActif, vIdRole, vIdCompetence, vIdNiveau 
+	FROM Employe
+	WHERE login = pLoginSaisi
+	AND motDePasse = pMotPasseSaisi;
 	
-	IF vEstActif = 1 THEN
-		reponse := vNomRole;	
+	IF (vEstActif = 0) THEN -- employé inactif
+		vReponse := 2;	
 	ELSE
-		reponse := 'Inactif';
-	END IF;
+		vReponse := 1;	 -- employé existant et actif
+	END IF; 
+	
 EXCEPTION
 	WHEN NO_DATA_FOUND THEN	
-		reponse := 'Inconnu';	
+		vReponse := 0;	-- employé inconnu
+	WHEN TOO_MANY_ROWS THEN	
+		vReponse := 0;	-- plusieurs employés pour ce login
 END;
 /
 
 -- Réussite avec un chef de projet
-VARIABLE retour VARCHAR2;
-EXECUTE Authentifier('Laurence', 'LR', :retour);
-PRINT retour;
+VARIABLE reponse NUMBER;
+VARIABLE idEmploye NUMBER; 
+VARIABLE nom VARCHAR2;
+VARIABLE prenom VARCHAR2;
+VARIABLE estActif NUMBER;
+VARIABLE idRole NUMBER;
+VARIABLE idCompetence NUMBER;
+VARIABLE idNiveau NUMBER;
+EXECUTE Authentifier('Laurence', '06d92ee9c796a7c2419a6ff814b2c022f13c2eae28289402f99e433ec5641', :reponse, :idEmploye, :nom, :prenom, :estActif, :idRole, :idCompetence, :idNiveau);
+PRINT reponse;
+PRINT idEmploye; 
+PRINT nom;
+PRINT prenom;
+PRINT estActif;
+PRINT idRole;
+PRINT idCompetence;
+PRINT idNiveau;
 
 -- Réussite avec un employe
-VARIABLE retour VARCHAR2;
-EXECUTE Authentifier('Laurent', 'LN', :retour);
-PRINT retour;
+VARIABLE reponse NUMBER;
+VARIABLE idEmploye NUMBER; 
+VARIABLE nom VARCHAR2;
+VARIABLE prenom VARCHAR2;
+VARIABLE estActif NUMBER;
+VARIABLE idRole NUMBER;
+VARIABLE idCompetence NUMBER;
+VARIABLE idNiveau NUMBER;
+EXECUTE Authentifier('Laurent', '69a844cab6d32d01e1aad4e3682a2ed5da89bd7ec38cc827bc38293bba4ce27', :reponse, :idEmploye, :nom, :prenom, :estActif, :idRole, :idCompetence, :idNiveau);
+PRINT reponse;
+PRINT idEmploye; 
+PRINT nom;
+PRINT prenom;
+PRINT estActif;
+PRINT idRole;
+PRINT idCompetence;
+PRINT idNiveau;
 
--- Echec 'Inconnu'
-VARIABLE retour VARCHAR2;
-EXECUTE Authentifier('Denis', 'DT', :retour);
-PRINT retour;
+-- Echec 0
+VARIABLE reponse NUMBER;
+VARIABLE idEmploye NUMBER; 
+VARIABLE nom VARCHAR2;
+VARIABLE prenom VARCHAR2;
+VARIABLE estActif NUMBER;
+VARIABLE idRole NUMBER;
+VARIABLE idCompetence NUMBER;
+VARIABLE idNiveau NUMBER;
+EXECUTE Authentifier('Denis', '69a844cab6d32d01e1aad4e3682a2ed5da89bd7ec38cc827bc38293bba4ce27', :reponse, :idEmploye, :nom, :prenom, :estActif, :idRole, :idCompetence, :idNiveau);
+PRINT reponse;
+PRINT idEmploye; 
+PRINT nom;
+PRINT prenom;
+PRINT estActif;
+PRINT idRole;
+PRINT idCompetence;
+PRINT idNiveau;
 
--- Echec 'Inconnu' à cause du mot de passe
-VARIABLE retour VARCHAR2;
-EXECUTE Authentifier('Olivier', 'DT', :retour);
-PRINT retour;
+-- Echec 0 à cause du mot de passe
+VARIABLE reponse NUMBER;
+VARIABLE idEmploye NUMBER; 
+VARIABLE nom VARCHAR2;
+VARIABLE prenom VARCHAR2;
+VARIABLE estActif NUMBER;
+VARIABLE idRole NUMBER;
+VARIABLE idCompetence NUMBER;
+VARIABLE idNiveau NUMBER;
+EXECUTE Authentifier('Olivier', '69a844cab6d32d01e1aad4e3682a2ed5da89bd7ec38cc827bc38293bba4ce27', :reponse, :idEmploye, :nom, :prenom, :estActif, :idRole, :idCompetence, :idNiveau);
+PRINT reponse;
+PRINT idEmploye; 
+PRINT nom;
+PRINT prenom;
+PRINT estActif;
+PRINT idRole;
+PRINT idCompetence;
+PRINT idNiveau;
 
--- Echec 'Inactif' 
-VARIABLE retour VARCHAR2;
-EXECUTE Authentifier('Florence', 'FS', :retour);
-PRINT retour;
+-- Echec 2 
+VARIABLE reponse NUMBER;
+VARIABLE idEmploye NUMBER; 
+VARIABLE nom VARCHAR2;
+VARIABLE prenom VARCHAR2;
+VARIABLE estActif NUMBER;
+VARIABLE idRole NUMBER;
+VARIABLE idCompetence NUMBER;
+VARIABLE idNiveau NUMBER;
+EXECUTE Authentifier('Florence', 'f71f7b443cf23e606f946dc774dcaac9a51d3e10df3bbfa0106351c56e0f93f', :reponse, :idEmploye, :nom, :prenom, :estActif, :idRole, :idCompetence, :idNiveau);
+PRINT reponse;
+PRINT idEmploye; 
+PRINT nom;
+PRINT prenom;
+PRINT estActif;
+PRINT idRole;
+PRINT idCompetence;
+PRINT idNiveau;
+
+INSERT INTO Employe VALUES (seq_id_employe.NEXTVAL,'Ober','Iulan','Iulan','1295b0b84cea614a9331304f55324ef706392a177dfdbe961280fc6148eb9d', 1, 2, 4, 1); 
+Select * from Employe where nom='Ober';
+
+-- Echec 2 -- trop d'employé avec login 'Iulan' 
+VARIABLE reponse NUMBER;
+VARIABLE idEmploye NUMBER; 
+VARIABLE nom VARCHAR2;
+VARIABLE prenom VARCHAR2;
+VARIABLE estActif NUMBER;
+VARIABLE idRole NUMBER;
+VARIABLE idCompetence NUMBER;
+VARIABLE idNiveau NUMBER;
+EXECUTE Authentifier('Iulan', '1295b0b84cea614a9331304f55324ef706392a177dfdbe961280fc6148eb9d', :reponse, :idEmploye, :nom, :prenom, :estActif, :idRole, :idCompetence, :idNiveau);
+PRINT reponse;
+PRINT idEmploye; 
+PRINT nom;
+PRINT prenom;
+PRINT estActif;
+PRINT idRole;
+PRINT idCompetence;
+PRINT idNiveau;
